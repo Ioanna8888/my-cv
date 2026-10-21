@@ -46,6 +46,13 @@ layout: null
   <h1>{{ site.data.cv.name | escape }}</h1>
   <p>{{ site.data.cv.title | escape }}</p>
 
+<p>
+  <a href="{{ '/cv.pdf' | relative_url }}"
+     download="Ioanna-Papachristou-CV.pdf">
+    📄 Λήψη βιογραφικού σε PDF
+  </a>
+</p>
+
   <h2>Σπουδές</h2>
   {% for item in site.data.cv.education %}
     <h3>{{ item.institution | escape }}</h3>
