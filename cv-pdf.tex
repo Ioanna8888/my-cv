@@ -4,34 +4,53 @@
 \usepackage[a4paper,margin=2cm]{geometry}
 \usepackage{fontspec}
 \setmainfont{DejaVu Sans}
+\usepackage{xcolor}
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage{parskip}
+\usepackage{titlesec}
+
+% Χρώματα λιλά
+\definecolor{purple}{HTML}{71569B}
+\definecolor{darkpurple}{HTML}{584376}
+\definecolor{lightpurple}{HTML}{CDBAE8}
+\definecolor{darktext}{HTML}{383044}
+
+\color{darktext}
 
 \hypersetup{
-  colorlinks=false,
-  hidelinks
+  colorlinks=true,
+  urlcolor=purple
 }
 
 \setlength{\parindent}{0pt}
 \setlist[itemize]{leftmargin=*,nosep}
 
+% Μωβ τίτλοι ενοτήτων
+\titleformat{\section}
+  {\Large\bfseries\color{purple}}
+  {}{0pt}{}
+  [\color{lightpurple}\titlerule]
+
+\titlespacing*{\section}{0pt}{14pt}{10pt}
+
 \begin{document}
 
 \begin{center}
-{\LARGE\bfseries $name$}
+{\LARGE\bfseries\color{purple} $name$}
 
 \vspace{5mm}
-$title$
+{\color{darkpurple} $title$}
 \end{center}
 
-\hrule
+\vspace{3mm}
+{\color{lightpurple}\hrule}
 \vspace{5mm}
 
 \section*{Εκπαίδευση}
 
 $for(education)$
-\textbf{$education.institution$}
+{\color{darkpurple}\textbf{$education.institution$}}
 
 $education.degree$
 
@@ -48,7 +67,7 @@ $endfor$
 \section*{Επαγγελματική Εμπειρία}
 
 $for(experience)$
-\textbf{$experience.organization$}
+{\color{darkpurple}\textbf{$experience.organization$}}
 
 $experience.position$
 
