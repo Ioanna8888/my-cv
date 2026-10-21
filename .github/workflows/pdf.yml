@@ -43,3 +43,22 @@ jobs:
           name: ioanna-cv-pdf
           path: cv.pdf
           if-no-files-found: error
+
+      - name: Install Jekyll
+        run: |
+          gem install jekyll -v 4.4.1 --no-document
+
+      - name: Build Jekyll website
+        run: |
+          jekyll build --destination _site
+
+      - name: Include PDF in website
+        run: |
+          cp cv.pdf _site/cv.pdf
+
+      - name: Upload website artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-website-preview
+          path: _site/
+          if-no-files-found: error
