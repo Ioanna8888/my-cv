@@ -1,0 +1,45 @@
+
+name: Generate CV PDF
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '_data/cv.yml'
+      - 'cv-pdf.tex'
+      - '.github/workflows/pdf.yml'
+  workflow_dispatch:
+
+jobs:
+  generate-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc and LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            pandoc \
+            texlive-xetex \
+            texlive-latex-extra \
+            fonts-dejavu-core
+
+      - name: Generate PDF from YAML
+        run: |
+          pandoc /dev/null \
+            --from=markdown \
+            --metadata-file=_data/cv.yml \
+            --template=cv-pdf.tex \
+            --pdf-engine=xelatex \
+            --output=cv.pdf
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ioanna-cv-pdf
+          path: cv.pdf
+          if-no-files-found: error
