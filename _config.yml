@@ -1,0 +1,10 @@
+
+title: Βιογραφικό Ιωάννας Παπαχρήστου
+description: Προσωπικό βιογραφικό για την εργασία ΣΔΥ60
+
+url: "https://ioanna8888.github.io"
+baseurl: "/my-cv"
+
+lang: el
+
+markdown: kramdown
