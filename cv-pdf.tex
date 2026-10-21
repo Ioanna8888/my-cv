@@ -1,0 +1,80 @@
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{DejaVu Sans}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\hypersetup{
+  colorlinks=false,
+  hidelinks
+}
+
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=*,nosep}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries $name$}
+
+\vspace{5mm}
+$title$
+\end{center}
+
+\hrule
+\vspace{5mm}
+
+\section*{Εκπαίδευση}
+
+$for(education)$
+\textbf{$education.institution$}
+
+$education.degree$
+
+$if(education.graduation_year)$
+$education.graduation_year$
+$endif$
+$if(education.academic_year)$
+$education.academic_year$
+$endif$
+
+\vspace{3mm}
+$endfor$
+
+\section*{Επαγγελματική Εμπειρία}
+
+$for(experience)$
+\textbf{$experience.organization$}
+
+$experience.position$
+
+\textit{$experience.period$}
+
+$if(experience.responsibilities)$
+\begin{itemize}
+$for(experience.responsibilities)$
+\item $experience.responsibilities$
+$endfor$
+\end{itemize}
+$endif$
+
+\vspace{3mm}
+$endfor$
+
+\section*{Δεξιότητες}
+
+\begin{itemize}
+$for(skills)$
+\item $skills$
+$endfor$
+\end{itemize}
+
+\section*{GitHub}
+
+\url{$github$}
+
+\end{document}
