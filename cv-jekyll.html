@@ -9,7 +9,12 @@ layout: null
   <title>{{ site.data.cv.name | escape }} - Βιογραφικό</title>
 
   
+
 <style>
+  html {
+    background: #EBE3F5;
+  }
+
   body {
     font-family: Arial, sans-serif;
     max-width: 800px;
@@ -22,10 +27,6 @@ layout: null
     box-shadow: 0 8px 25px rgba(100, 76, 135, 0.10);
   }
 
-  html {
-    background: #EBE3F5;
-  }
-
   h1 {
     color: #71569B;
     text-align: center;
@@ -35,9 +36,10 @@ layout: null
 
   h2 {
     color: #71569B;
-    margin-top: 30px;
+    margin-top: 0;
+    margin-bottom: 18px;
     border-bottom: 2px solid #CDBAE8;
-    padding-bottom: 7px;
+    padding-bottom: 8px;
   }
 
   h3 {
@@ -49,6 +51,19 @@ layout: null
     color: #716781;
   }
 
+  .cv-card {
+    background: #FFFFFF;
+    padding: 24px;
+    margin-top: 22px;
+    border-radius: 14px;
+    border: 1px solid #E9DFF4;
+    box-shadow: 0 4px 14px rgba(100, 76, 135, 0.08);
+  }
+
+  .cv-card p {
+    margin-top: 5px;
+  }
+
   a {
     color: #71569B;
     font-weight: bold;
@@ -58,65 +73,108 @@ layout: null
     color: #4E3475;
   }
 
+  .pdf-container {
+    text-align: center;
+    margin: 25px 0;
+  }
+
+  .pdf-button {
+    display: inline-block;
+    background: #71569B;
+    color: #FFFFFF;
+    padding: 13px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(113, 86, 155, 0.20);
+  }
+
+  .pdf-button:hover {
+    background: #584376;
+    color: #FFFFFF;
+  }
+
   @media (max-width: 600px) {
     body {
       margin: 12px;
-      padding: 20px;
+      padding: 18px;
+    }
+
+    .cv-card {
+      padding: 18px;
     }
   }
 </style>
 
+
 </head>
+
 
 <body>
 
   <h1>{{ site.data.cv.name | escape }}</h1>
-  <p>{{ site.data.cv.title | escape }}</p>
-
-<p>
-  <a href="{{ '/cv.pdf' | relative_url }}"
-     download="Ioanna-Papachristou-CV.pdf">
-    📄 Λήψη βιογραφικού σε PDF
-  </a>
-</p>
-
-  <h2>Σπουδές</h2>
-  {% for item in site.data.cv.education %}
-    <h3>{{ item.institution | escape }}</h3>
-    <p>{{ item.degree | escape }}</p>
-    <p class="period">
-      {{ item.graduation_year | default: item.academic_year }}
-    </p>
-  {% endfor %}
-
-  <h2>Εργασιακή Εμπειρία</h2>
-  {% for job in site.data.cv.experience %}
-    <h3>{{ job.organization | escape }}</h3>
-    <p>{{ job.position | escape }}</p>
-    <p class="period">{{ job.period | escape }}</p>
-
-    {% if job.responsibilities %}
-      <ul>
-        {% for task in job.responsibilities %}
-          <li>{{ task | escape }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  {% endfor %}
-
-  <h2>Δεξιότητες</h2>
-  <ul>
-    {% for skill in site.data.cv.skills %}
-      <li>{{ skill | escape }}</li>
-    {% endfor %}
-  </ul>
-
-  <h2>GitHub</h2>
-  <p>
-    <a href="{{ site.data.cv.github | escape }}">
-      Προσωπικό προφίλ GitHub
-    </a>
+  <p style="text-align: center;">
+    {{ site.data.cv.title | escape }}
   </p>
 
+  <div class="pdf-container">
+    <a class="pdf-button"
+       href="{{ '/cv.pdf' | relative_url }}"
+       download="Ioanna-Papachristou-CV.pdf">
+      📄 Λήψη βιογραφικού σε PDF
+    </a>
+  </div>
+
+  <section class="cv-card">
+    <h2>Σπουδές</h2>
+
+    {% for item in site.data.cv.education %}
+      <h3>{{ item.institution | escape }}</h3>
+      <p>{{ item.degree | escape }}</p>
+      <p class="period">
+        {{ item.graduation_year | default: item.academic_year }}
+      </p>
+    {% endfor %}
+  </section>
+
+  <section class="cv-card">
+    <h2>Εργασιακή Εμπειρία</h2>
+
+    {% for job in site.data.cv.experience %}
+      <h3>{{ job.organization | escape }}</h3>
+      <p>{{ job.position | escape }}</p>
+      <p class="period">{{ job.period | escape }}</p>
+
+      {% if job.responsibilities %}
+        <ul>
+          {% for task in job.responsibilities %}
+            <li>{{ task | escape }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="cv-card">
+    <h2>Δεξιότητες</h2>
+
+    <ul>
+      {% for skill in site.data.cv.skills %}
+        <li>{{ skill | escape }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="cv-card">
+    <h2>GitHub</h2>
+
+    <p>
+      <a href="{{ site.data.cv.github | escape }}">
+        Προσωπικό προφίλ GitHub
+      </a>
+    </p>
+  </section>
+
 </body>
+
 </html>
