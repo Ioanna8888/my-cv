@@ -6,6 +6,7 @@ permissions:
   pages: write
   id-token: write
 
+
 on:
   push:
     branches:
@@ -13,8 +14,12 @@ on:
     paths:
       - '_data/cv.yml'
       - 'cv-pdf.tex'
+      - 'cv-jekyll.html'
+      - 'index.html'
+      - '_config.yml'
       - '.github/workflows/pdf.yml'
   workflow_dispatch:
+
 
 jobs:
   generate-pdf:
