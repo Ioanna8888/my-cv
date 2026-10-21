@@ -1,6 +1,11 @@
 
 name: Generate CV PDF
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 on:
   push:
     branches:
@@ -62,3 +67,11 @@ jobs:
           name: cv-website-preview
           path: _site/
           if-no-files-found: error
+
+      - name: Prepare GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare Pages deployment artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site/
